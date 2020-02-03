@@ -1,0 +1,26 @@
+---
+title: "K-means clustering"
+author: "Kelvin"
+date: "2/3/2020"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+df<-iris
+head(df)
+library(ggplot2)
+pl<- ggplot(iris, aes(Petal.Length, Petal.Width, color=Species))
+pl+geom_point(size=2)
+
+set.seed(101)
+
+iriscluster<-kmeans(iris[,1:4],3,nstart = 20)
+table(iriscluster$cluster, iris$Species)
+library(cluster)
+clusplot(iris,iriscluster$cluster, color=T, shade=T,labels=0, lines=0)
+```
+
